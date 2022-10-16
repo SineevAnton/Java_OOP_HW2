@@ -3,32 +3,31 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        // Создаем 4 экземпляра класса Person для работы с ними.
-        // node1 - родитель для node2
-        // node2 - родитель для node3 и node4
-        Person node1 = new Person("First","Man");
-        Person node2 = new Person("Second","Man", node1);
-        Person node3 = new Person("Third","Man", node2);
-        Person node4 = new Person("Fourth","Man", node2);
+        Persona per1 = new Persona("N1", "S1", Persona.Sex.MALE, null);
+        Persona per2 = new Persona("N2", "S2", Persona.Sex.MALE, per1);
+        Persona per3 = new Persona("N3", "S3", Persona.Sex.FEMALE, per2);
+        Persona per4 = new Persona("N4", "S4", Persona.Sex.MALE, per3);
+        Persona per5 = new Persona("N5", "S5", Persona.Sex.FEMALE, per3);
+        Persona per6 = new Persona("N6", "S6", Persona.Sex.FEMALE, per5);
 
-        //Для ДЗ семинара 2 (сейчас неактуально)
-        //PathFinder visitor = new PathFinder("Man","Second");
-        //Walker walker = new Walker(visitor);
-        //walker.walk(node3);
-        //List<Person> result = (List<Person>) walker.getResult();
-        //System.out.println(walker.getResult());
+        System.out.println("Parent('s): ");
+        for (Persona person : per2.getParents()) {
+            System.out.println(person.getNameData());
+        }
 
-        System.out.println("Перечень людей: " + Person.getPersons());
+        System.out.println("Children are: ");
+        for (Persona person : per3.getChildren()) {
+            System.out.println(person.getNameData());
+        }
 
-        System.out.println("Дети человека 1: " + node1.getChildren());
-        System.out.println("Дети человека 2: " + node2.getChildren());
-        System.out.println("Дети человека 3: " + node3.getChildren());
+        System.out.println("Subparents are: ");
+        for (Persona person : per3.getSubParents()) {
+            System.out.println(person.getNameData());
+        }
 
-        System.out.println();
-
-        System.out.println("Родители человека 1: " + node1.getParent());
-        System.out.println("Родители человека 2: " + node2.getParent());
-        System.out.println("Родители человека 3: " + node3.getParent());
-        System.out.println("Родители человека 4: " + node4.getParent());
+        System.out.println("Subchildren are: ");
+        for (Persona person : per3.getSubChildren()) {
+            System.out.println(person.getNameData());
+        }
     }
 }
